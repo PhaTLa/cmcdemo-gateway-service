@@ -21,6 +21,7 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import java.nio.charset.StandardCharsets;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -47,6 +48,13 @@ public class GatewayAuthenticationFilter implements GatewayFilter {
                 Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
                 JWTVerifier verifier = JWT.require(algorithm).build();
                 DecodedJWT decodedJWT = verifier.verify(token);
+
+                Instant exp = decodedJWT.getExpiresAtAsInstant();
+
+                if(exp.isBefore(Instant.now())){
+                    return this.onError(exchange,"Token expired! Please login.",HttpStatus.UNAUTHORIZED);
+                }
+
                 String username = decodedJWT.getSubject();
                 String[] roles = decodedJWT.getClaim("roles").asArray(String.class);
 

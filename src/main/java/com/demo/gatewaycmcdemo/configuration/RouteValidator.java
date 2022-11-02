@@ -8,7 +8,6 @@ import org.springframework.util.AntPathMatcher;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Predicate;
 
 @Component
 @Getter
@@ -18,9 +17,17 @@ public class RouteValidator {
 
     public RouteValidator() {
         this.noAuthEndpoint = new ArrayList<>();
-        String[] enpoints = {"user/api/token/refresh/**",
-                "/product/api/products", "/product/api/product/**", "/v3/**","/product/api/categories",
-                "/blog/api/blog/**", "/blog/api/blogs/**", "/product/api/image/**", "/user/api/login", "/user/api/register"};
+        String[] enpoints = {
+                "user/api/token/refresh/**",
+                "/product/api/products",
+                "/product/api/product/**",
+                "/v3/**","/product/api/categories",
+                "/blog/api/blog/**",
+                "/blog/api/blogs/**",
+                "/product/api/image/**",
+                "/user/api/login",
+                "/user/api/register"
+        };
         this.noAuthEndpoint.addAll(Arrays.asList(enpoints));
         this.matcher = new AntPathMatcher();
     }
