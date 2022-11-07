@@ -18,15 +18,17 @@ public class RouteValidator {
     public RouteValidator() {
         this.noAuthEndpoint = new ArrayList<>();
         String[] enpoints = {
-                "user/api/token/refresh/**",
+                "/user/api/token/refresh",
                 "/product/api/products",
                 "/product/api/product/**",
-                "/v3/**","/product/api/categories",
+                "/v3/**",
+                "/product/api/categories",
                 "/blog/api/blog/**",
-                "/blog/api/blogs/**",
+                "/blog/api/blogs",
                 "/product/api/image/**",
                 "/user/api/login",
-                "/user/api/register"
+                "/user/api/register",
+                "/cart/api/cart/**"
         };
         this.noAuthEndpoint.addAll(Arrays.asList(enpoints));
         this.matcher = new AntPathMatcher();
