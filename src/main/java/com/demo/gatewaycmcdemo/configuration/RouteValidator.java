@@ -28,7 +28,8 @@ public class RouteValidator {
                 "/product/api/image/**",
                 "/user/api/login",
                 "/user/api/register",
-                "/cart/api/cart/**"
+                "/cart/api/cart/**",
+                "/common/api/**"
         };
         this.noAuthEndpoint.addAll(Arrays.asList(enpoints));
         this.matcher = new AntPathMatcher();
