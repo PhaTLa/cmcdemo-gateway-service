@@ -56,6 +56,7 @@ public class GatewayAuthenticationFilter implements GatewayFilter {
                 }
 
                 String username = decodedJWT.getSubject();
+                log.info("==================> username: {}",username);
                 String[] roles = decodedJWT.getClaim("roles").asArray(String.class);
 
                 if(!Arrays.asList(roles).contains("ADMIN")){
@@ -95,6 +96,7 @@ public class GatewayAuthenticationFilter implements GatewayFilter {
     }
 
     private void populateRequestWithHeader(ServerWebExchange exchange, String username, String[] roles){
+        log.info("================> populate with header:\n {} - {} \n {} - {}","username",username,"roles",roles);
         exchange.getRequest().mutate()
                 .header("username",username)
                 .header("roles",String.join(",",roles))
